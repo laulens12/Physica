@@ -5,6 +5,7 @@ using namespace std;
 void run(double x0, double v0, double a, double t, double *pt, double *px, double *pv);
 void scaleArrays(double *px, double *pv, int *px_g, int *pv_g);
 void drawbmp(int *px_g, int *pv_g);
+void table(double x0, double v0, double a, double dt, double t_max);
 
 int main()
 {
@@ -13,6 +14,7 @@ int main()
   double x0; cout << "x0:\t"; cin >> x0;
   double v0; cout << "v0:\t"; cin >> v0;
   double a; cout << "a:\t"; cin >> a;
+  double dt_table; cout << "dt:\t"; cin >> dt_table;
   double t_max; cout << "t_max:\t"; cin >> t_max;
 
   double dt = t_max / 99.0;
@@ -25,6 +27,8 @@ int main()
 
   scaleArrays(px, pv, px_g, pv_g);
   drawbmp(px_g, pv_g);
+
+  table(x0, v0, a, dt_table, t_max);
 
   return 0;
 }
@@ -93,6 +97,35 @@ void drawbmp(int *px_g, int *pv_g)
   // ofs << "Hello, world!" << endl;
 
   cout << "Chart saved as './graph.bmp'." << endl;
+
+  ofs.close();
+
+  return;
+}
+
+void table(double x0, double v0, double a, double dt, double t_max)
+{
+  ofstream ofs;
+  ofs.open("table.txt", ios::out | ios::trunc);
+  if (!ofs.is_open())
+  {
+    cout << "Couldn't open file 'table.txt'." << endl;
+    return;
+  }
+
+  ofs << "t\tx\tv" << endl;
+
+  for (double t = 0; t <= t_max; t += dt)
+  {
+    double dv = a * t;
+    double v = v0 + dv;
+    double vg = 0.5 * (v0 + v);
+    double dx = vg * t;
+    double x = x0 + dx;
+    ofs << t << "\t" << x << "\t" << v << endl;
+  }
+
+  cout << "Table saved as './table.txt'." << endl;
 
   ofs.close();
 
