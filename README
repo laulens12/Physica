@@ -1,1 +1,8 @@
 Welcome to Physica. This program was created by Laurens Paulsen. It provides you with a way to calculate place and speed of any object in uniform acceleration and make a graph of this. Feel free to use, test or improve it. If you come across any issues, please report them so they can be solved.
+
+Files:
+ - main.cpp    C++ source file with all code
+ - main        Linux executable file compiled from main.cpp
+ - table.txt   Results of a test run seperated with tabs
+ - graph.bmp   Results of a test run as an graph stored as bitmap image
+ - README
